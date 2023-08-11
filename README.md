@@ -6,6 +6,7 @@ you're offline. Save as much as you need and do the organizing later!
 
 
 # Screenshots
+<img src="https://camo.githubusercontent.com/..." data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png](https://github.com/realersy/Movie-Tiers/assets/12517589/abbf2727-d780-43d2-b96c-23bac394a80a)" width="200" height="400" />
 ![photo_2023-08-12 00 46 34](https://github.com/realersy/Movie-Tiers/assets/12517589/abbf2727-d780-43d2-b96c-23bac394a80a)
 ![photo_2023-08-12 00 46 38](https://github.com/realersy/Movie-Tiers/assets/12517589/36e2086f-2813-4821-9d65-dae075254ce4)
 ![photo_2023-08-12 00 46 41](https://github.com/realersy/Movie-Tiers/assets/12517589/794c50c5-cfe5-4acb-bc57-0f2e24e42cc7)
