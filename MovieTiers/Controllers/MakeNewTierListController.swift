@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class MakeNewTierListController: UIViewController {
-    
+    //MARK: Parameters
     let titleLabel = UILabel()
     let titleTextField = UITextField()
     
@@ -20,13 +20,13 @@ final class MakeNewTierListController: UIViewController {
     let nextButton = UIButton()
     
     weak var delegate: TierListDelegate?
-    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
 }
-
+//MARK: Setup
 extension MakeNewTierListController {
     func setup(){
         //View
@@ -97,14 +97,6 @@ extension MakeNewTierListController {
         nextButton.addTarget(self, action: #selector(goNext), for: .touchUpInside)
     }
     
-    @objc func goNext(){
-        let int_text = Int(numberOfTiersTextField.text!) ?? 3
-        let makeTiersController = MakeTiersController(numOfTiers: int_text, tierTitle: titleTextField.text!)
-        //present(makeTiersController, animated: true)
-        makeTiersController.tierListDelegate = delegate
-        navigationController?.pushViewController(makeTiersController, animated: true)
-    }
-    
     func shake(){
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.05
@@ -124,7 +116,7 @@ extension MakeNewTierListController {
         }
     }
 }
-
+//MARK: UITextFieldDelegate
 extension MakeNewTierListController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return titleTextField.resignFirstResponder()
@@ -133,7 +125,6 @@ extension MakeNewTierListController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let int_text = Int(numberOfTiersTextField.text!) ?? 3
@@ -164,6 +155,16 @@ extension MakeNewTierListController: UITextFieldDelegate {
                 
             ])
         }
+    }
+}
+//MARK: Selector Functions
+extension MakeNewTierListController {
+    @objc func goNext(){
+        let int_text = Int(numberOfTiersTextField.text!) ?? 3
+        let makeTiersController = MakeTiersController(numOfTiers: int_text, tierTitle: titleTextField.text!)
+        //present(makeTiersController, animated: true)
+        makeTiersController.tierListDelegate = delegate
+        navigationController?.pushViewController(makeTiersController, animated: true)
     }
 }
 

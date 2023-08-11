@@ -9,7 +9,7 @@ import UIKit
 
 final class TabBarController: UITabBarController {
     
-    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.backgroundColor = .white
@@ -19,6 +19,7 @@ final class TabBarController: UITabBarController {
     }
 }
 
+//MARK: Setup the View Controllers of the TabBarController
 extension TabBarController {
     func setupTabs(){
         let myTierListController = createNav(title: "My Tier Lists", image: UIImage(systemName: "trophy"), vc: MyTierListController())
@@ -29,7 +30,7 @@ extension TabBarController {
         self.selectedIndex = 1
     }
     
-    func createNav(title: String, image: UIImage?, vc: UIViewController) -> UINavigationController {
+    func createNav(title: String, image: UIImage?, vc: UIViewController & ProfileServiceSubscriber) -> UINavigationController {
         let nav = UINavigationController(rootViewController: vc)
         nav.tabBarItem.title = title
         nav.tabBarItem.image = image
@@ -37,7 +38,7 @@ extension TabBarController {
         nav.navigationBar.isTranslucent = true
         nav.viewControllers.first?.navigationItem.title = title
         nav.navigationBar.tintColor = .white
-        
+        ProfileService.shared.subscribe(subscriber: vc)
         return nav
         
     }

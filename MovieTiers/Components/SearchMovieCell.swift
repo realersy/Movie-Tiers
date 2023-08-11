@@ -10,9 +10,13 @@ import UIKit
 
 final class SearchMovieCell: UICollectionViewCell {
     
+    //MARK: Cell identifier
     public static let cellID = "searchMovieCell"
+    
+    //MARK: Properties
     let imageView = UIImageView()
     
+    //MARK: Initialers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -22,7 +26,7 @@ final class SearchMovieCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
+//MARK: Setup
 extension SearchMovieCell {
     func setup(){
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +38,9 @@ extension SearchMovieCell {
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
-    
+}
+//MARK: Cell configuration
+extension SearchMovieCell {
     func configImage(item: SearchItem){
         
         SearchMovieService.shared.getImage(urlToImage: item.imageLinkString ?? "") { data in

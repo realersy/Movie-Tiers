@@ -8,8 +8,14 @@
 import Foundation
 import UIKit
 
+//MARK: ItemDelegate
+//Delete a item and Pass back new [Item]
+protocol ItemsDelegate: AnyObject {
+    func itemsDidChange(newInventory: [Item])
+}
+
 final class MoviePosterController: UIViewController {
-    
+    //MARK: Parameters
     let imageView = UIImageView()
     let  titleLabel = UILabel()
     let deleteButton = UIButton()
@@ -17,13 +23,15 @@ final class MoviePosterController: UIViewController {
     var myInventory: [Item]?
     var index: Int?
     
+    weak var itemsDelegate: ItemsDelegate?
+    
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("we are here----------")
         view.backgroundColor = UIColor("#33377A")
         setup()
     }
-    
+    //MARK: Custom Init
     init(_ title: String, _ imageData: Data, _ items: [Item], _ index: Int){
         self.myInventory = items
         self.index = index
@@ -36,7 +44,7 @@ final class MoviePosterController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
+//MARK: Setup
 extension MoviePosterController {
     func setup(){
         view.addSubview(deleteButton)
@@ -72,11 +80,11 @@ extension MoviePosterController {
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
     }
-    
-     @objc func pressedDelete(){
-         myInventory?.remove(at: index!)
-         FileService.shared.writeModel(items: myInventory!)
-         navigationController?.popViewController(animated: true)
-    }
-    
+}
+//MARK: Selector Functions
+extension MoviePosterController {
+    @objc func pressedDelete(){
+        ProfileService.shared.removeItemFromInventory(index: index!)
+        navigationController?.popViewController(animated: true)
+   }
 }

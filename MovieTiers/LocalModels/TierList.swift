@@ -7,10 +7,12 @@
 
 import Foundation
 
-struct TierList {
-    let tierList: [Tier]
-    let title: String
+struct TierList: Codable {
+    //MARK: Parameters
+    var tierList: [Tier]
+    var title: String
     
+    //Returns an array of colors in hex
     func getColorsArray() -> [String] {
         var arr: [String] = []
         tierList.forEach { item in

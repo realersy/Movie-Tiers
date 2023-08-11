@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class InventoryController: UIViewController {
-    
+    //MARK: Parameters
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -19,47 +19,46 @@ final class InventoryController: UIViewController {
     }()
     var myInventory: [Item]?
     
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        myInventory = FileService.shared.readModel()
         collectionView.reloadData()
         collectionView.backgroundColor = UIColor("#33377A")
         setupCollectionView()
     }
-    
+    //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        myInventory = FileService.shared.readModel()
         collectionView.reloadData()
     }
-    
+    //MARK: Custom Init
     convenience init(items: [Item]){
         self.init(nibName: nil, bundle: nil)
         self.myInventory = items
         
     }
 }
-
+//MARK: UICollection View Delegate/DataSource
 extension InventoryController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return myInventory?.count ?? 0
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchMovieCell.cellID, for: indexPath) as! SearchMovieCell
         cell.imageView.image = UIImage(data: myInventory![indexPath.row].imageData)
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let title = myInventory?[indexPath.row].title
         let image = myInventory?[indexPath.row].imageData
-        navigationController?.pushViewController(MoviePosterController(title!,
-                                                                       image!,
-                                                                       myInventory!,
-                                                                       indexPath.row), animated: true)
+        let moviePosterController = MoviePosterController(title!,
+                                                           image!,
+                                                           myInventory!,
+                                                           indexPath.row)
+        moviePosterController.itemsDelegate = self
+        navigationController?.pushViewController(moviePosterController, animated: true)
     }
 }
-
+//MARK: Setup
 private extension InventoryController {
     func setupCollectionView(){
         collectionView.dataSource = self
@@ -77,10 +76,23 @@ private extension InventoryController {
         ])
     }
 }
-
+//MARK: UICollectionViewDelegateFlowLayout
 extension InventoryController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.width / 3) - 24
         return CGSize(width: width, height: width*1.6)
+    }
+}
+//MARK: Conform to ProfileServiceSubscriber
+extension InventoryController: ProfileServiceSubscriber {
+    func refresh(model: ProfileModel) {
+        myInventory = model.inventory
+        collectionView.reloadData()
+    }
+}
+//MARK: Refresh Inventory
+extension InventoryController: ItemsDelegate {
+    func itemsDidChange(newInventory: [Item]) {
+        myInventory = newInventory
     }
 }

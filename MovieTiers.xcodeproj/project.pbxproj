@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A32D5792A782DE40065305C /* AddTierCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A32D5782A782DE40065305C /* AddTierCell.swift */; };
+		2A4E019A2A7FC84400B5534C /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4E01992A7FC84400B5534C /* ProfileService.swift */; };
 		2A646F042A7868CD001940E6 /* TierListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A646F032A7868CC001940E6 /* TierListCell.swift */; };
 		2A7C17F02A704E9000609676 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7C17EF2A704E9000609676 /* AppDelegate.swift */; };
 		2A7C17F22A704E9000609676 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7C17F12A704E9000609676 /* SceneDelegate.swift */; };
@@ -30,10 +31,14 @@
 		2AB06D1C2A794CEF00A1C9F0 /* TierMakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB06D1B2A794CEF00A1C9F0 /* TierMakerView.swift */; };
 		2ACB27ED2A71959600A3960F /* MoviePosterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACB27EC2A71959600A3960F /* MoviePosterController.swift */; };
 		2AF5A3912A71D054003F98DC /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5A3902A71D054003F98DC /* FileService.swift */; };
+		2AFAFEFE2A810B8900A9B584 /* TiersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFAFEFD2A810B8900A9B584 /* TiersController.swift */; };
+		2AFAFF002A810D7E00A9B584 /* TiersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFAFEFF2A810D7E00A9B584 /* TiersCell.swift */; };
+		2AFB2A4F2A82C2710060F954 /* AddItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFB2A4E2A82C2710060F954 /* AddItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2A32D5782A782DE40065305C /* AddTierCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTierCell.swift; sourceTree = "<group>"; };
+		2A4E01992A7FC84400B5534C /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		2A646F032A7868CC001940E6 /* TierListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierListCell.swift; sourceTree = "<group>"; };
 		2A7C17EC2A704E9000609676 /* MovieTiers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTiers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7C17EF2A704E9000609676 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +62,9 @@
 		2AB06D1B2A794CEF00A1C9F0 /* TierMakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TierMakerView.swift; sourceTree = "<group>"; };
 		2ACB27EC2A71959600A3960F /* MoviePosterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePosterController.swift; sourceTree = "<group>"; };
 		2AF5A3902A71D054003F98DC /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		2AFAFEFD2A810B8900A9B584 /* TiersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiersController.swift; sourceTree = "<group>"; };
+		2AFAFEFF2A810D7E00A9B584 /* TiersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiersCell.swift; sourceTree = "<group>"; };
+		2AFB2A4E2A82C2710060F954 /* AddItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,7 @@
 				2ACB27EC2A71959600A3960F /* MoviePosterController.swift */,
 				2AB06D192A7932AA00A1C9F0 /* MakeNewTierListController.swift */,
 				2AAA0F502A79790F00C5EA89 /* MakeTiersController.swift */,
+				2AFAFEFD2A810B8900A9B584 /* TiersController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -144,6 +153,8 @@
 				2A32D5782A782DE40065305C /* AddTierCell.swift */,
 				2A646F032A7868CC001940E6 /* TierListCell.swift */,
 				2AB06D1B2A794CEF00A1C9F0 /* TierMakerView.swift */,
+				2AFAFEFF2A810D7E00A9B584 /* TiersCell.swift */,
+				2AFB2A4E2A82C2710060F954 /* AddItemCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -161,6 +172,7 @@
 			children = (
 				2A7C18192A705F6900609676 /* SearchMovieService.swift */,
 				2AF5A3902A71D054003F98DC /* FileService.swift */,
+				2A4E01992A7FC84400B5534C /* ProfileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -260,15 +272,19 @@
 				2A7C17F02A704E9000609676 /* AppDelegate.swift in Sources */,
 				2AB06D1A2A7932AA00A1C9F0 /* MakeNewTierListController.swift in Sources */,
 				2AF5A3912A71D054003F98DC /* FileService.swift in Sources */,
+				2AFAFEFE2A810B8900A9B584 /* TiersController.swift in Sources */,
+				2AFB2A4F2A82C2710060F954 /* AddItemCell.swift in Sources */,
 				2A32D5792A782DE40065305C /* AddTierCell.swift in Sources */,
 				2A7C17F22A704E9000609676 /* SceneDelegate.swift in Sources */,
 				2AB06D1C2A794CEF00A1C9F0 /* TierMakerView.swift in Sources */,
 				2A7C181D2A7065D400609676 /* UIColor+Extensions.swift in Sources */,
 				2A646F042A7868CD001940E6 /* TierListCell.swift in Sources */,
 				2A7C18142A705E1900609676 /* SearchMovieCell.swift in Sources */,
+				2AFAFF002A810D7E00A9B584 /* TiersCell.swift in Sources */,
 				2A7C180D2A7052C600609676 /* TabBarController.swift in Sources */,
 				2A7C18042A704F2000609676 /* Tier.swift in Sources */,
 				2A7C18062A704FDF00609676 /* Item.swift in Sources */,
+				2A4E019A2A7FC84400B5534C /* ProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,10 +426,12 @@
 				DEVELOPMENT_TEAM = 9XZ2ZF22UM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieTiers/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -437,10 +455,12 @@
 				DEVELOPMENT_TEAM = 9XZ2ZF22UM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MovieTiers/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

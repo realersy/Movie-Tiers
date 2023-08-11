@@ -23,22 +23,23 @@ final class SearchMovieController: UIViewController {
     var retreivedMovies = [SearchItem]()
     var inventoryMovies = [Item]()
     
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        inventoryMovies = FileService.shared.readModel()
         collectionView.backgroundColor = UIColor("#33377A")
         setupNavigationController()
         setupCollectionView()
     }
 }
 
+//MARK: Search Controller Setup
 extension SearchMovieController {
     func setupNavigationController(){
         navigationItem.searchController = searchController
         searchController.searchBar.placeholder = "Find that movie poster..."
     }
 }
-
+//MARK: Setup Collection View
 private extension SearchMovieController {
     func setupCollectionView(){
         collectionView.dataSource = self
@@ -57,7 +58,7 @@ private extension SearchMovieController {
         ])
     }
 }
-
+//MARK: UICollection View Delegate/DataSource
 extension SearchMovieController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         retreivedMovies.count
@@ -66,45 +67,29 @@ extension SearchMovieController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchMovieCell.cellID, for: indexPath) as! SearchMovieCell
         cell.configImage(item: retreivedMovies[indexPath.row])
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let cell = collectionView.cellForItem(at: indexPath) as! SearchMovieCell
         guard let itemTitle = retreivedMovies[indexPath.row].title else { return }
         let itemImage = cell.imageView.image?.jpegData(compressionQuality: 0.4)
-        
-        for item in inventoryMovies {
+        for item in ProfileService.shared.getModelInventory() {
             if item.title == itemTitle {
                 let indicatorView = SPIndicatorView(title: "Check your Inventory", preset: .error)
                 indicatorView.present(duration: 2)
                 return
             }
         }
-        if itemImage == nil {
-            
-        }
-        inventoryMovies.append(Item(imageData: (itemImage ?? UIImage(named: "notFoundImage")?.jpegData(compressionQuality: 0.4))!, title: itemTitle))
-        let vc = InventoryController(items: inventoryMovies)
-        vc.tabBarItem.title = "Inventory"
-        vc.tabBarItem.image = UIImage(systemName: "tray.full")
-        tabBarController?.viewControllers?[1] = vc
-        FileService.shared.writeModel(items: inventoryMovies)
+        ProfileService.shared.addItemToInventory(item: .init(imageData: (itemImage ?? UIImage(named: "notFoundImage")?.jpegData(compressionQuality: 0.4))!, title: itemTitle))
+        
         let indicatorView = SPIndicatorView(title: "Added to Inventory", preset: .done)
         indicatorView.present(duration: 2)
-        
-        print("------------------------")
-        inventoryMovies.forEach { item in
-            print(item.title)
-            print(item.imageData)
-        }
     }
 }
-
+//MARK: SearchBarDelegate
 extension SearchMovieController: UISearchBarDelegate {
-    
+    //After clicking search perform API call
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         SearchMovieService.shared.getMovies(query: searchBar.text!) { response in
             self.retreivedMovies = response.data ?? []
@@ -112,10 +97,16 @@ extension SearchMovieController: UISearchBarDelegate {
         }
     }
 }
-
+//MARK: UICollectionViewDelegateFlowLayout
 extension SearchMovieController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.width / 3) - 24
         return CGSize(width: width, height: width*1.6)
+    }
+}
+//MARK: Conform to ProfileServiceSubscriber
+extension SearchMovieController: ProfileServiceSubscriber {
+    func refresh(model: ProfileModel) {
+        //Nothing
     }
 }

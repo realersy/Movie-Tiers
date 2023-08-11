@@ -8,7 +8,10 @@
 import Foundation
 import UIKit
 
+
+//MARK: Custom Initialzer
 extension UIColor {
+    //Parameter _ hex must start with a # sign
     convenience init?(_ hex: String) {
         if hex.hasPrefix("#") {
             let hexString = String(hex.dropFirst(1))
@@ -30,6 +33,7 @@ extension UIColor {
     }
 }
 
+//MARK: Converts UIColor to a hex String
 extension UIColor {
         func toHexString() -> String {
             var r:CGFloat = 0

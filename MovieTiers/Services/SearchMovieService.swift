@@ -7,16 +7,19 @@
 
 import Foundation
 final class SearchMovieService {
-    
+    //MARK: Singleton parameter
     public static let shared = SearchMovieService()
     
+    //MARK: Parameters
     let headers = [
         "X-RapidAPI-Key": "c29bc93c2amsh02e3c782185c0a4p143b18jsn62915c0bcc77",
         "X-RapidAPI-Host": "imdb188.p.rapidapi.com"
     ]
     
+    //MARK: Init
     private init(){}
     
+    //Gets the list of movies
     func getMovies(query: String, completion: @escaping (Response) -> Void) {
         let newQuery = query.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
         var request = URLRequest(url: URL(string: "https://imdb188.p.rapidapi.com/api/v1/searchIMDB?query=\(newQuery)")!)
@@ -37,7 +40,7 @@ final class SearchMovieService {
         }.resume()
     
     }
-    
+    //Gets the movie poster image
     func getImage(urlToImage: String, _ completion: @escaping ((Data) -> Void))  {
         guard let imageURL = URL(string: urlToImage) else { return }
         

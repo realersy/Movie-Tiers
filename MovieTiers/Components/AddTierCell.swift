@@ -9,21 +9,25 @@ import Foundation
 import UIKit
 
 final class AddTierCell: UICollectionViewCell {
-    
+    //MARK: Cell identifier
     public static let cellID = "addCell"
     
+    //MARK: Properties
     let addButton = UIButton()
     let titleLabel = UILabel()
     
+    //MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+//MARK: Setup
+extension AddTierCell {
     func setup(){
         
         //ContentView

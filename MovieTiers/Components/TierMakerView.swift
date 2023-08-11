@@ -10,6 +10,7 @@ import UIKit
 
 final class TierMakerView: UIView {
     
+    //MARK: Properies
     let colorButton = UIButton()
     let tierTitle = UITextField()
     
@@ -23,6 +24,7 @@ final class TierMakerView: UIView {
     }
 }
 
+//MARK: Setup
 extension TierMakerView {
     func setup(){
         

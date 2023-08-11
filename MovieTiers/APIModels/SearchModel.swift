@@ -7,11 +7,11 @@
 
 import Foundation
 
+
 struct Response: Codable {
     var data: [SearchItem]?
     
 }
-
 struct SearchItem: Codable {
     let title: String?
     let year: Int?

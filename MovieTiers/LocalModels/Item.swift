@@ -8,6 +8,7 @@
 import Foundation
 
 struct Item: Codable {
-    let imageData: Data
-    let title: String
+    //MARK: Parameters
+    var imageData: Data
+    var title: String
 }

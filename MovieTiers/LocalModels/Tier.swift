@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct Tier {
-    let colorHex: String
-    let name: String
-    let items: [Item]
+struct Tier: Codable {
+    //MARK: Parameters
+    var colorHex: String
+    var name: String
+    var items: [Item]
     
 }

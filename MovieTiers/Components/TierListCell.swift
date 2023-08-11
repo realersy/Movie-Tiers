@@ -9,11 +9,15 @@ import Foundation
 import UIKit
 
 final class TierListCell: UICollectionViewCell {
-    
+    //MARK: Cell identifier
     public static let cellID = "tierCell"
+    
+    //MARK: Properties
     let titleLabel = UILabel()
+    let closeButton = UIButton()
     var stackView = UIStackView()
     
+    //MARK: Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -23,6 +27,32 @@ final class TierListCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        stackView.arrangedSubviews.map{
+            $0.removeFromSuperview()
+        }
+    }
+    
+    
+    func configColors(colors: [String]){
+        colors.forEach { item in
+            let v = UIView()
+            v.layer.cornerRadius = 18
+            v.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                v.widthAnchor.constraint(equalToConstant: 30),
+                v.heightAnchor.constraint(equalToConstant: 30)
+            ])
+            v.backgroundColor = UIColor(item)
+            stackView.addArrangedSubview(v)
+        }
+    }
+}
+
+//MARK: Setup
+extension TierListCell {
     func setup(){
         //ContentView
         backgroundColor = UIColor("#260E2B")
@@ -52,21 +82,23 @@ final class TierListCell: UICollectionViewCell {
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12)
         ])
-    }
-    
-    func configColors(colors: [String]){
         
-        colors.forEach { item in
-            let v = UIView()
-            v.layer.cornerRadius = 18
-            v.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                v.widthAnchor.constraint(equalToConstant: 30),
-                v.heightAnchor.constraint(equalToConstant: 30)
-            ])
-            v.backgroundColor = UIColor(item)
-            stackView.addArrangedSubview(v)
-            print(item)
-        }
+        //Close Button
+        closeButton.setImage(UIImage(named: "close"), for: [])
+        contentView.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(closeButtonPressed), for: .touchUpInside)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            closeButton.heightAnchor.constraint(equalToConstant: 35),
+            closeButton.widthAnchor.constraint(equalToConstant: 35),
+            closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -9),
+            closeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 9)
+        ])
+    }
+}
+//MARK: Selector Functions
+extension TierListCell {
+    @objc func closeButtonPressed(sender: UIButton){
+        ProfileService.shared.deleteTierList(index: sender.tag)
     }
 }

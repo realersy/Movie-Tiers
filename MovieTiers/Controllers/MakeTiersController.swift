@@ -7,13 +7,13 @@
 
 import Foundation
 import UIKit
-
+//MARK: TierListDelegate
 protocol TierListDelegate: AnyObject {
     func tierListDidChange(newTierList: TierList)
 }
 
 final class MakeTiersController: UIViewController {
-    
+    //MARK: Parameters
     var stackView = UIStackView()
     let nextButton = UIButton()
     
@@ -25,9 +25,9 @@ final class MakeTiersController: UIViewController {
     var titlesArray = [String]()
     
     weak var tierListDelegate: TierListDelegate?
-    
     var index: Int = 0
     
+    //MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor("#33377A")
@@ -43,9 +43,9 @@ final class MakeTiersController: UIViewController {
     }
     
 }
-
+//MARK: Setup
 extension MakeTiersController {
-    
+    //Setup next Button
     func setupNextButton(){
         nextButton.setTitle("Create List", for: [])
         view.addSubview(nextButton)
@@ -63,7 +63,7 @@ extension MakeTiersController {
             
         ])
     }
-    
+    //Setup stackView
     func setupStackView(){
         view.addSubview(stackView)
         stackView.distribution = .equalCentering
@@ -72,10 +72,6 @@ extension MakeTiersController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-//            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 170),
-//            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -500),
-//            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -100,15 +96,29 @@ extension MakeTiersController {
         
     }
 }
-
+//MARK: UIColorPickerViewControllerDelegate
 extension MakeTiersController: UIColorPickerViewControllerDelegate {
     @objc func pressedColor(sender: UIButton){
         let colorVC = UIColorPickerViewController()
         index = sender.tag
         colorVC.delegate = self
         present(colorVC, animated: true)
-        
     }
+    
+    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
+        (stackView.arrangedSubviews[index] as! TierMakerView).colorButton.backgroundColor = color
+        dismiss(animated: true)
+    }
+}
+//MARK: UITextFieldDelegate
+extension MakeTiersController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+//MARK: Selector Functions
+extension MakeTiersController {
     @objc func createList(){
         for i in 0...numOfTiers-1{
             if (stackView.arrangedSubviews[i] as! TierMakerView).tierTitle.text == "" {
@@ -124,8 +134,6 @@ extension MakeTiersController: UIColorPickerViewControllerDelegate {
             colorsArray.append((stackView.arrangedSubviews[i] as! TierMakerView).colorButton.backgroundColor?.toHexString() ?? "#FFFFFF")
             titlesArray.append((stackView.arrangedSubviews[i] as! TierMakerView).tierTitle.text!)
         }
-        //(tabBarController?.viewControllers[2] as! MyTierListController)
-        //self.tierListDelegate = (tabBarController?.viewControllers?[2].children.first as? TierListDelegate)
         var tiers = [Tier]()
         for i in 0...numOfTiers-1{
             let tier = Tier(colorHex: colorsArray[i], name: titlesArray[i], items: [])
@@ -135,16 +143,5 @@ extension MakeTiersController: UIColorPickerViewControllerDelegate {
         
         tierListDelegate?.tierListDidChange(newTierList: tierList)
         navigationController?.popToRootViewController(animated: true)
-    }
-    
-    func colorPickerViewController(_ viewController: UIColorPickerViewController, didSelect color: UIColor, continuously: Bool) {
-        (stackView.arrangedSubviews[index] as! TierMakerView).colorButton.backgroundColor = color
-        dismiss(animated: true)
-    }
-}
-
-extension MakeTiersController: UITextFieldDelegate {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
     }
 }
